@@ -62,17 +62,19 @@ async def acrawl_journalist_info_pages(code2name):
     
     results = await asyncio.gather(*tasks)
     
-    await session.close()
-    print(results)
-    
+    await session.close()   
+
     # from code import interact
     # interact(local = locals())
     
     # ######################## 돌아오는 result 활용 부분
-    
-    code2name[press_code] = (code2name[press_code], press_info)
+    idx = 0
+    for press_code in code2name:
+        code2name[press_code] = (code2name[press_code], results[idx])
+        idx += 1
         
-    # return code2name 
+    print(code2name['081'])
+    return code2name 
 
 class Journalist:
     def __init__(self, name, press_code, 
